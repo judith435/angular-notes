@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html ng-app="notes-app">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Memo Board</title>
+        <link href="https://fonts.googleapis.com/css?family=Patrick+Hand" rel="stylesheet">
+        <link rel="stylesheet"
+           href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" 
+           integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" 
+           crossorigin="anonymous">
+        <!-- site css file placed after bootstrap files to enable overriding of bootstrap styles --> 
+        <link rel="stylesheet" href="styles.css"/> 
+        
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>    
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" 
+            integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" 
+            crossorigin="anonymous"></script>
+        <script src="../node_modules/angular/angular.min.js"></script>
+        <!-- <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-route.js"></script> -->
+        <script src="app.js"></script>
+        <script src="controller.js"></script>
+        <script src="service.js"></script>
+    </head>
+    <body>
+        <header></header>
+        <form name="formNewNote" novalidate>
+            <main class="container-fluid img-responsive" ng-controller="ctrlAddNote">
+                <div class="form-inline">
+                    <div class="form-group">
+                        <label for="memoDate">Date:</label>
+                        <input type="date" class="form-control" id="memoDate" name="memoDate" ng-model="memo_date" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="memoTime">Time:</label>
+                        <input type="time" class="form-control" id="memoTime"  ng-model="memo_time" >
+                    </div>
+                    <div class="form-group position-left">
+                        <button type="button" ng-click="addNote()"  class="btn btn-default"/>Save</button> 
+                    </div>
+                    <!-- ng-click="formNewNote.$valid && addNote()" -->
+                    </div>
+                    <div  class="position-left">
+                        <span style="color:red" ng-show="formNewNote.memo_content.$invalid && showErrorMessages">
+                             <span ng-show="formNewNote.memo_content.$error.required && showErrorMessages">Memo Content is required.</span>
+                        </span>
+                    </div>
+                    <div class="form-group">
+                        <label for="memo_content">Memo</label>
+                        <textarea class="form-control" rows="5" id="memo_content" ng-model="memo_content"
+                            placeholder="Enter your memo... (maximum 70 characters)"  name="memo_content" 
+                                maxlength="70" required>
+                        </textarea>
+                    </div>
+            </main>
+        </form>
+        <div  class="container-fluid" ng-controller="ctrlNotes">
+            <div ng-repeat="note in notes">
+                <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3 memo-background"
+                     ng-class="{'fade-in': note.new, '': !note.new}"> 
+                    <button class="btn btn-link"  type="button" 
+                        ng-click="deleteNote($index)">   
+                        <span class="glyphicon glyphicon-trash deleteButton"></span>
+                    </button>
+                    <textarea  disabled="" style="height: 140px; background: transparent;"
+                        class="form-control memo">{{note.content}}</textarea>
+                    <label>{{note.date}}</label>
+                    <br>
+                    <label>{{note.time}}</label>
+                </div>                
+            </div>
+        </div>
+    </body>
+</html>

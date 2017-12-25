@@ -1,0 +1,26 @@
+{
+  "name": "angular-notes",
+  "version": "1.0.0",
+  "description": "convert notes to angular",
+  "main": "index.html",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "http-server ./ -p8000"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/judith435/angular-notes.git"
+  },
+  "author": "judith ilson",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/judith435/angular-notes/issues"
+  },
+  "homepage": "https://github.com/judith435/angular-notes#readme",
+  "dependencies": {
+    "angular": "^1.6.8"
+  },
+  "devDependencies": {
+    "http-server": "^0.10.0"
+  }
+}
